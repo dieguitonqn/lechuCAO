@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block style %}
+<link rel="stylesheet" href="/static/css/home.css">
+{% endblock %}
+
+{% block body %}
+<div class="container">
+    <form action="/docs" method="post">
+        <div>
+            <h1>Selección de Obra</h1>
+        </div>
+        <label for="obra">Obra:</label>
+        <select name="obra" id="obra">
+            <option value=""></option>
+
+        </select>
+        <div>
+            <button type="submit">Buscar</button>    
+        </div>
+        
+    </form>
+</div>
+
+{% endblock %}

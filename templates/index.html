@@ -1,25 +1,23 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LechuCAO</title>
-    <link rel="stylesheet" href="/static/css/index.css">
-    <link rel="shortcut icon" href="/static/favicon.ico" type="image/x-icon">
-</head>
-<body>
-    <div class="background">
-        <div class="content">
-            <div>
-                <img src="/static/images/lechuza.png" alt="lechuza nerd" >
-            </div>
-            <h1>Bienvenido a LechuCAO</h1>
-            <p>Tu sistema de consulta de documentos y planos de obras.</p>
-            <div class="buttons">
-                <button onclick="location.href='signin.html'">Sign In</button>
-                <button onclick="location.href='signup.html'">Sign Up</button>
-            </div>
+{% extends "base.html" %}
+{% block style %}
+<link rel="stylesheet" href="/static/css/index.css">
+
+{% endblock %}
+
+{% block body %}
+
+<div class="background">
+    <div class="content">
+        <div>
+            <img src="/static/images/lechuza.png" alt="lechuza nerd" >
+        </div>
+        <h1>Bienvenido a LechuCAO</h1>
+        <p>Tu sistema de consulta de documentos y planos de obras.</p>
+        <div class="buttons">
+            <button onclick="location.href='/signin'">Sign In</button>
+            <button onclick="location.href='signup.html'">Sign Up</button>
         </div>
     </div>
-</body>
-</html>
+</div>
+
+{% endblock %}

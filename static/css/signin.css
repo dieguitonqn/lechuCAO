@@ -1,0 +1,94 @@
+@font-face {
+    font-family: 'Acme Regular';
+    /* Nombre de la fuente a utilizar */
+    src: url('/static/fonts/Acme-Regular.ttf') format('truetype');
+    /* Ruta a la fuente */
+    font-weight: normal;
+    /* Peso de la fuente (opcional) */
+    font-style: normal;
+    /* Estilo de la fuente (opcional) */
+    font-display: swap;
+    /* Opcional para mejorar la carga de la fuente */
+}
+
+
+
+/* body,
+html {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #f0f0f0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+} */
+
+
+.header h1 {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 20px;
+    font-family: "Acme Regular", sans-serif;
+}
+
+.image-container {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.logo {
+    width: 150px;
+    height: 150px;
+}
+
+h2 {
+    font-size: 1.8em;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin: 10px 0 5px;
+    font-size: 1em;
+    color: #333;
+}
+
+input {
+    width: 90%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+}
+
+
+
+button:hover {
+    background-color: #0097a7;
+}
+
+.signup-link {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.register-link {
+    color: #4caf50;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.register-link:hover {
+    text-decoration: underline;
+}

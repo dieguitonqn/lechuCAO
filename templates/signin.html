@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block style %}
+<link rel="stylesheet" href="/static/css/signin.css">
+{% endblock %}
+
+
+{% block body %}
+    <div class="container">
+        <form id="loginForm" class="form" method="post" action="/login">
+            <div class="header">
+                <h1>LechuCAO</h1>
+            </div>
+
+            <div class="image-container">
+                <img src="/static/images/lechuza.png" alt="LechuCAO" class="logo">
+            </div>
+
+            <h2>Inicio de Sesión</h2>
+            <div>
+                <label for="usr">Nombre de usuario</label>
+                <input type="text" id="usr" name="username" required>
+            </div>
+            <div>
+                <label for="pwd">Contraseña</label>
+                <input type="password" id="pwd" name="password" required>
+            </div>
+            <button type="submit">Login</button>
+        </form>
+
+        <div class="signup-link">
+            <p>¿No tienes una cuenta? <a href="/signup" class="register-link">Regístrate</a></p>
+        </div>
+    </div>
+{% endblock %}
