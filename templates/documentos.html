@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{% block style %}
+<link rel="stylesheet" href="/static/css/documentos.css">
+{% endblock %}
+
+
+{% block body %}
+
+<h1>Lista de Documentos</h1>
+    
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Código</th>
+                <th>Número</th>
+                <th>Descripción</th>
+                <th>Revisión</th>
+                <th>Estado</th>
+                <th>Fecha de Ingreso</th>
+                <th>Fecha de Egreso</th>
+                <th>N° de Informe</th>
+                <th>NP</th>
+                <th>URL del Archivo</th>
+                <th>URL del Informe</th>
+                <th>OS</th>
+                <th>URL de OS</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for documento in documentos %}
+            <tr>
+                <td>{{ documento.id }}</td>
+                <td>{{ documento.codigo }}</td>
+                <td>{{ documento.numero }}</td>
+                <td>{{ documento.descripcion }}</td>
+                <td>{{ documento.revision }}</td>
+                <td>{{ documento.estado }}</td>
+                <td>{{ documento.fecha_ingreso }}</td>
+                <td>{{ documento.fecha_egreso }}</td>
+                <td>{{ documento.N_informe }}</td>
+                <td>{{ documento.NP }}</td>
+                <td><a href="{{ documento.file_url }}" target="_blank">Enlace</a></td>
+                <td><a href="{{ documento.inf_url }}" target="_blank">Enlace</a></td>
+                <td>{{ documento.os }}</td>
+                <td><a href="{{ documento.OS_url }}" target="_blank">Enlace</a></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

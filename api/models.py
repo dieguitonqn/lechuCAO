@@ -24,20 +24,20 @@ class User(Base):
 
 
 
-# class ET(Base):
-#     __tablename__ = "PLANTILLA" 
+class ET(Base):
+    __tablename__ = "PLANTILLA" 
 
-#     id = Column(Integer, primary_key=True)
-#     codigo = Column(String(200))
-#     numero = Column(String(200))
-#     descripcion = Column(String(100))
-#     revision = Column(String(100))
-#     estado = Column(String(50))
-#     fecha_ingreso = Column(String(50))
-#     fecha_egreso= Column(String(5))
-#     N_informe = Column(String(20))
-#     NP = Column(String(5))
-#     file_url=Column(String(200))
-#     inf_url= Column(String(200))
-#     os = Column(String(20))
-#     OS_url = Column(String(200))
+    id = Column(Integer, primary_key=True)
+    codigo = Column(String(200))
+    numero = Column(String(200))
+    descripcion = Column(String(100))
+    revision = Column(String(100))
+    estado = Column(String(50))
+    fecha_ingreso = Column(String(50))
+    fecha_egreso= Column(String(5))
+    N_informe = Column(String(20))
+    NP = Column(String(5))
+    file_url=Column(String(200))
+    inf_url= Column(String(200))
+    os = Column(String(20))
+    OS_url = Column(String(200))
