@@ -5,12 +5,12 @@ from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from passlib.hash import pbkdf2_sha256, bcrypt
 from datetime import timedelta, timezone, datetime
-from .databases import SessionLocal, Base
+from ..databases import SessionLocal, Base
 import api.crud as crud
 from fastapi.templating import Jinja2Templates
 from sqlalchemy import text
 from sqlalchemy.orm import Session
-from .schemas import ET
+from ..schemas import ET
 
 import json
 
@@ -22,41 +22,15 @@ router = APIRouter()
 #         yield db
 #     finally:
 #         db.close()
+router.mount("/static", StaticFiles(directory="static"), name="static")
 
-def compare_passwords(plain_pwd, stored_hash):
-    is_match = bcrypt.verify(plain_pwd, stored_hash)
-    return is_match
-
+templates = Jinja2Templates(directory="templates")
 
 class ETRequest(BaseModel):
     et: str
 
 
 
-
-router.mount("/static", StaticFiles(directory="static"), name="static")
-
-templates = Jinja2Templates(directory="templates")
-
-
-@router.post("/login",  response_class=HTMLResponse)
-async def verify_password(request:Request, username: Annotated[str, Form()], password: Annotated[str, Form()]):
-    db  = SessionLocal()
-    user = crud.get_user(db, username=username)
-
-    if not user:
-        raise HTTPException(status_code=401, detail="Usuario no encontrado")
-
-    is_match = compare_passwords(password, user.pwd)
-    if is_match:
-        return RedirectResponse(
-            url="/home", 
-            status_code=status.HTTP_303_SEE_OTHER)
-    else:
-        return templates.TemplateResponse(
-            request=request,
-            name="index.html",
-        )
     
 # Dependencia para obtener la sesión de la base de datos
 def get_db():
@@ -71,7 +45,7 @@ async def docs(request: Request, obra:Annotated[str,Form()], db: Session = Depen
     # et=et.et
     data=[]
     try:
-        stmt = text(f"SELECT * FROM {obra} where estado ='CAO'")
+        stmt = text(f"SELECT * FROM {obra} ")
         result = db.execute(statement=stmt)
         for res in result:
             et_dict = {
@@ -104,3 +78,5 @@ async def docs(request: Request, obra:Annotated[str,Form()], db: Session = Depen
     finally:
         db.close()
     
+
+

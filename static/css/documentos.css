@@ -1,0 +1,41 @@
+.container {
+    max-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+table {
+    width: calc(100% - 40px); /* Ajusta el ancho de la tabla para considerar los márgenes */
+    margin: 20px; /* Agrega margen alrededor de la tabla */
+    border-collapse: collapse;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+table th, table td {
+    padding: 12px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+table th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+}
+
+table tbody tr:hover {
+    background-color: #ddd;
+}
+
+table a {
+    text-decoration: none;
+    color: #007bff;
+}
+
+table a:hover {
+    text-decoration: underline;
+}

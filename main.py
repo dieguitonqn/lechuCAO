@@ -3,10 +3,14 @@ from api.main import app
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
-from api import routers
+from api.routers import documentos, mongo, login
 
 app = FastAPI()
-app.include_router(routers.router)
+app.include_router(documentos.router)
+app.include_router(mongo.router)
+app.include_router(login.router)
+
+
 app.mount("/static", StaticFiles(directory="static"), name="static")
 templates = Jinja2Templates(directory="templates")
 

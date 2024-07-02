@@ -1,7 +1,10 @@
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from sqlalchemy import create_engine, MetaData
 from sqlalchemy.orm import sessionmaker, declarative_base
+from motor.motor_asyncio import AsyncIOMotorClient
 
+
+#--------------MariaDB----------------------------------
 class DB_Settings(BaseSettings):
     DB_NAME : str
     DB_USER : str
@@ -19,3 +22,19 @@ engine = create_engine(DATABASE_URL)
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base = declarative_base()
 metadata = MetaData()
+
+#'-------------------------------------------------
+
+#-----------------MONGO DB-------------------------
+# class DB_Mongo_Settings(BaseSettings):
+#     MONGO_URI : str
+#     model_config = SettingsConfigDict(env_file=".env")
+
+# mongo_conn = DB_Mongo_Settings()
+# client = AsyncIOMotorClient(mongo_conn)
+MONGO_URI = "mongodb+srv://Test123456:Test123456@lechucao.k5wkexo.mongodb.net/?retryWrites=true&w=majority&appName=lechuCAO"
+client = AsyncIOMotorClient(MONGO_URI)
+
+mongodb = client.lechucao_core
+users = mongodb.users
+et_plantilla = mongodb.ET_PLANTILLA
