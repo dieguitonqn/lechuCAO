@@ -10,6 +10,7 @@ class DB_Settings(BaseSettings):
     DB_USER : str
     DB_PWD : str
     DB_HOST : str
+    MONGO_URI : str
     model_config = SettingsConfigDict(env_file=".env")
 
 
@@ -32,8 +33,8 @@ metadata = MetaData()
 
 # mongo_conn = DB_Mongo_Settings()
 # client = AsyncIOMotorClient(mongo_conn)
-MONGO_URI = "mongodb+srv://Test123456:Test123456@lechucao.k5wkexo.mongodb.net/?retryWrites=true&w=majority&appName=lechuCAO"
-client = AsyncIOMotorClient(MONGO_URI)
+
+client = AsyncIOMotorClient(db_settings.MONGO_URI)
 
 mongodb = client.lechucao_core
 users = mongodb.users

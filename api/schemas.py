@@ -1,7 +1,7 @@
 
 
 from datetime import date
-from bson import ObjectId
+from bson.objectid import ObjectId
 from pydantic import BaseModel, Field
 from typing import Optional
 
@@ -44,34 +44,22 @@ class UserInDB(UserBase):
         orm_mode = True
 
 
-
-class PyObjectId(ObjectId):
-    @classmethod
-    def __get_validators__(cls):
-        yield cls.validate
-
-    @classmethod
-    def validate(cls,v):
-        if not ObjectId.is_valid(v):
-            raise ValueError('Invalid ObjectID')
-        return str(v)
-
-class ET(BaseModel):
-    id: Optional[str] = Field(alias = ':id')
+class Doc(BaseModel):
+    id: Optional[str] = Field(default=None, description="MongoDB OjectID")
     codigo:str
     descripcion:str = None
     revision:str = None
-    ultima_mod: date = None
+    ultima_mod: str = None
     link_doc:str = None
     
-    class Config:
-        orm_mode =True
-        allow_population_by_field_name = True
-        json_encoders = {ObjectId:str}
 
 
-
-def ets_schema (et) -> dict:
+def doc_schema (et) -> dict:
     return {
-        
+        "id" : str(et['_id']),
+        "codigo" : et["codigo"],
+        "descripcion" : et["descripcion"],
+        "revision" : et["revision"],
+        "ultima_mod" : et["ultima_mod"], 
+        "link_doc" : et["link_doc"]
     }
