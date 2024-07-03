@@ -2,15 +2,21 @@ from fastapi import APIRouter, Request, HTTPException, status
 from fastapi.responses import JSONResponse
 from ..databases import et_plantilla
 from bson import ObjectId
-from ..schemas import doc_schema, Doc
+from ..schemas import doc_schema, Doc, docs_schema
 
 router = APIRouter()
 
 
 
-# @router.get("/docs_list", response_model=list(ET))
-# async def mongodb():
-#     return et_plantilla.find()
+@router.get("/docs_list", response_model=list[Doc])
+async def doc_list():
+    docs_cursor = et_plantilla.find({})
+    
+    docs = await docs_cursor.to_list(length=None)
+
+    return  await docs_schema(docs)
+
+
 
 @router.post("/doc_input", response_model=Doc)
 async def docinput(doc:Doc):

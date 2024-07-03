@@ -54,12 +54,15 @@ class Doc(BaseModel):
     
 
 
-def doc_schema (et) -> dict:
+def doc_schema (doc) -> dict:
     return {
-        "id" : str(et['_id']),
-        "codigo" : et["codigo"],
-        "descripcion" : et["descripcion"],
-        "revision" : et["revision"],
-        "ultima_mod" : et["ultima_mod"], 
-        "link_doc" : et["link_doc"]
+        "id" : str(doc['_id']),
+        "codigo" : doc["codigo"],
+        "descripcion" : doc["descripcion"],
+        "revision" : doc["revision"],
+        "ultima_mod" : doc["ultima_mod"], 
+        "link_doc" : doc["link_doc"]
     }
+
+async def docs_schema (docs:dict)-> list:
+    return [doc_schema(doc) for doc in docs]
