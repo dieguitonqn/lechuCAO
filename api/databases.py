@@ -39,3 +39,4 @@ client = AsyncIOMotorClient(db_settings.MONGO_URI)
 mongodb = client.lechucao_core
 users = mongodb.users
 et_plantilla = mongodb.ET_PLANTILLA
+et_lc = mongodb.etlc

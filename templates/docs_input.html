@@ -5,7 +5,7 @@
 
 {% block body %}
 <div class="container">
-    <form action="/documentos" method="post">
+    <form action="/docs_input" method="post">
         <div>
             <h1>Selección de Obra</h1>
         </div>
@@ -15,10 +15,10 @@
             {% for collection in collections %}
                 <option value="{{ collection }}"> {{ collection }} </option>
             {% endfor %}
-
         </select>
+        
         <div>
-            <button type="submit">Buscar</button>    
+            <button type="submit">Ingresar</button>    
         </div>
         
     </form>
