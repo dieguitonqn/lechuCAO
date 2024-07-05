@@ -5,9 +5,9 @@
 
 {% block body %}
 <div class="container">
-    <form action="/docs_input" method="post">
+    <form action="/ingreso_docs" method="post" id="formIngreso">
         <div>
-            <h1>Selección de Obra</h1>
+            <h1>Ingreso de documentos</h1>
         </div>
         <label for="obra">Obra:</label>
         <select name="obra" id="obra">
@@ -16,12 +16,45 @@
                 <option value="{{ collection }}"> {{ collection }} </option>
             {% endfor %}
         </select>
+
         
+        <div class="form-group" >
+            <div class="row" >
+                <div class="col-3"style="padding: 10px; background-color: rgba(176, 200, 176,0.4)">
+                    <label for="numDocs" class="form-control"  >Cantidad de documentos adjuntos: </label>
+                </div>
+                <div class="col-1"style="padding: 10px; background-color: rgba(176, 200, 176,0.3)">
+                    <input type="number" class ="form-control"name="numDocs" id="numDocs" style="max-width: 100px; "  required>
+                </div>
+                <div class="col-2"style="padding: 10px; background-color: rgba(176, 200, 176,0.3)">
+                    <label class="form-control" id="maxDocsLabel"><span id=maxDocs>0</span>Mb de 50Mb</label>
+                </div>
+            </div>
+            
+        </div>
+        <br><br>
+
+
+        <table class= "table table-bordered text-center" id="formDocs" >
+            <thead>
+                <th>Item</th>
+                <th style="min-width: 200px">Archivo</th>
+                <th>Código</th>
+
+                <th style="min-width: 200px">Descripción</th>
+                <th>Revisión</th>
+            </thead>
+            <tbody id="ingresos">
+            </tbody>
+
+        </table>
+        <br>
+
         <div>
             <button type="submit">Ingresar</button>    
         </div>
-        
     </form>
 </div>
 
+<script src="../static/js/docs_input.js"></script>
 {% endblock %}

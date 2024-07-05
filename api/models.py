@@ -1,9 +1,10 @@
+from fastapi import UploadFile
 from sqlalchemy import Boolean, Column, ForeignKey, Integer, String
 from sqlalchemy.ext.declarative import as_declarative, declared_attr
 from sqlalchemy.orm import relationship
-
+from datetime import date
 from api.databases import Base
-
+from pydantic import BaseModel
 
 class User(Base):
     __tablename__ = "Usuarios"
@@ -41,3 +42,10 @@ class ET(Base):
     inf_url= Column(String(200))
     os = Column(String(20))
     OS_url = Column(String(200))
+
+class FormDataRow(BaseModel):
+    file: UploadFile = None
+    codigo: str = ""
+    descripcion: str = ""
+    revision: str = ""
+    

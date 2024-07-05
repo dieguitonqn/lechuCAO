@@ -26,11 +26,11 @@ form {
     border-radius: 10px;
     border: 2px solid #ccc;
     width: 100%;
-    max-width: 600px;
+    max-width: 100%;
     text-align: center;
     box-shadow: black ;
     align-items: center;
-
+    margin-bottom: 20px;
 }
 
 button {
