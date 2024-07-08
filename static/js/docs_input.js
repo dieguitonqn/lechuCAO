@@ -74,13 +74,14 @@ function hijo() {
         const tdInputCod = document.createElement("TD");
         const tdInputDesc = document.createElement("TD");
         const tdInputRev = document.createElement("TD");
+        const tdInputDate = document.createElement("TD");
 
         //creo los elementos de cada "TD"
         const inputFile = document.createElement("INPUT");
         const inputCod = document.createElement("INPUT");
         const inputDesc = document.createElement("INPUT");
         const inputRev = document.createElement("INPUT");
-
+        const inputDate = document.createElement("INPUT");
 
         //Defino los atributos de cada INPUT
         //-->
@@ -99,9 +100,7 @@ function hijo() {
 
         //-->INPUT COD
         inputCod.setAttribute("type", "text");
-        // inputCod.setAttribute("id", `fileCod${i + 1}`);
-        inputCod.setAttribute("id", `fileCod`);
-
+        inputCod.setAttribute("id", `fileCod${i + 1}`);
         inputCod.setAttribute("name", `fileCod${i + 1}`);
         inputCod.setAttribute("required", "true");
         inputCod.classList.add("form-control");
@@ -126,12 +125,21 @@ function hijo() {
         inputRev.setAttribute("style", "max-width:3vw");
         inputRev.setAttribute("value", preFileRev[i + 1]);
 
+        //-->INPUT Date
+        inputDate.setAttribute("type", "date");
+        inputDate.setAttribute("id", `fileDate${i + 1}`);
+        inputDate.setAttribute("name", `fileDate${i + 1}`);
+        inputDate.setAttribute("required", "true");
+        inputDate.classList.add("form-control");
+        inputDate.setAttribute("style", "max-width:3vw");
+        inputDate.setAttribute("value", preFileRev[i + 1]);
 
         //Agrego los inputs a cada TD
         tdInputFile.appendChild(inputFile);
         tdInputCod.appendChild(inputCod);
         tdInputDesc.appendChild(inputDesc);
         tdInputRev.appendChild(inputRev);
+        tdInputDate.appendChild(inputDate);
 
         //Finalmente, agrego todos los TD al TR
         trInput.appendChild(tdInputItem);
@@ -139,6 +147,7 @@ function hijo() {
         trInput.appendChild(tdInputCod);
         trInput.appendChild(tdInputDesc);
         trInput.appendChild(tdInputRev);
+        trInput.appendChild(tdInputDate);
 
         formsNuevos.appendChild(trInput);
 
