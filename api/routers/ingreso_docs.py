@@ -31,25 +31,30 @@ class FormSchema(BaseModel):
 
 
 @router.post("/ingreso_docs")
-async def ingreso_docs( obra: str = Form(...),  # Campo de texto
-    numDocs: int = Form(...),  # Campo de texto para la cantidad de documentos
-    files: List[UploadFile] = File(...),  # Lista de archivos
-    fileCod: List[str] = Form(...),  # Lista de códigos de documentos
-    fileDesc: List[str] = Form(...),  # Lista de descripciones de documentos
-    fileRev: List[str] = Form(...),  # Lista de revisiones de documentos
-):
+async def ingreso_docs( request:Request, fileDoc : List[UploadFile]):
+    # obra: str = Form(...),  # Campo de texto
+    # # numDocs: int = Form(...),  # Campo de texto para la cantidad de documentos
+    # files: List[UploadFile] = File(...),  # Lista de archivos
+    # fileCod: List[str] = Form(...),  # Lista de códigos de documentos
+    # fileDesc: List[str] = Form(...),  # Lista de descripciones de documentos
+    # fileRev: List[str] = Form(...),  # Lista de revisiones de documentos
+# ):
     
-    # Procesar los datos recibidos
-    for idx, file in enumerate(files):
-        contents = await file.read()
-        print(f"Archivo {idx + 1}: {file.filename}, tamaño: {len(contents)} bytes")
+    # # Procesar los datos recibidos
+    # for idx, file in enumerate(files):
+    #     contents = await file.read()
+    #     print(f"Archivo {idx + 1}: {file.filename}, tamaño: {len(contents)} bytes")
 
-    # Iterar sobre las listas de campos de texto
-    for i in range(len(fileCod)):
-        print(f"Documento {i + 1}: Código={fileCod[i]}, Descripción={fileDesc[i]}, Revisión={fileRev[i]}")
+    # # Iterar sobre las listas de campos de texto
+    # for i in range(len(fileCod)):
+    #     print(f"Documento {i + 1}: Código={fileCod[i]}, Descripción={fileDesc[i]}, Revisión={fileRev[i]}")
 
-    # Puedes hacer lo que necesites con los datos aquí, como guardarlos en una base de datos
+    # # Puedes hacer lo que necesites con los datos aquí, como guardarlos en una base de datos
+    data = await request.form()
+    print (data)
+    print(data.get("numDocs"))
 
+    print({"filenames": [file.filename for file in fileDoc]})
     return {"message": "Formulario recibido exitosamente"}
     # return RedirectResponse(
     #         url="/home", 

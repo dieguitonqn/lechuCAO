@@ -89,7 +89,8 @@ function hijo() {
         //--> INPUT FILE
         inputFile.setAttribute("type", "file");
         inputFile.setAttribute("id", `fileDoc${i + 1}`);
-        inputFile.setAttribute("name", `fileDoc${i + 1}`);
+        // inputFile.setAttribute("name", `fileDoc${i + 1}`);
+        inputFile.setAttribute("name", `fileDoc`);
         inputFile.setAttribute("accept", "application/pdf");
         inputFile.setAttribute("required", "true");
         inputFile.setAttribute("style", "width: 500px");
@@ -98,7 +99,9 @@ function hijo() {
 
         //-->INPUT COD
         inputCod.setAttribute("type", "text");
-        inputCod.setAttribute("id", `fileCod${i + 1}`);
+        // inputCod.setAttribute("id", `fileCod${i + 1}`);
+        inputCod.setAttribute("id", `fileCod`);
+
         inputCod.setAttribute("name", `fileCod${i + 1}`);
         inputCod.setAttribute("required", "true");
         inputCod.classList.add("form-control");
