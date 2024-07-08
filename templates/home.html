@@ -3,6 +3,8 @@
 <link rel="stylesheet" href="/static/css/home.css">
 {% endblock %}
 
+
+
 {% block body %}
 <div class="container">
     <form action="/documentos" method="post">
@@ -10,7 +12,7 @@
             <h1>Selección de Obra</h1>
         </div>
         <label for="obra">Obra:</label>
-        <select name="obra" id="obra">
+        <select name="obra" id="obra" required>
             <option value=""></option>
             {% for collection in collections %}
                 <option value="{{ collection }}"> {{ collection }} </option>
@@ -25,3 +27,4 @@
 </div>
 
 {% endblock %}
+{% include 'navbar.html' %}

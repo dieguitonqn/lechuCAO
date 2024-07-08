@@ -1,0 +1,58 @@
+.navbar {
+    background-color: #28881b; /* Color de fondo del navbar */
+    overflow: hidden;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    /* z-index: 1000; Asegura que esté sobre otros elementos */
+}
+
+.navbar .logo {
+    float: left;
+    margin-left: 20px;
+}
+
+.navbar .logo img {
+    height: 50px; /* Ajusta el tamaño del logo según tu diseño */
+    vertical-align: middle;
+}
+
+.navbar a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    display: block;
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.navbar a:hover {
+    background-color: #555; /* Color de fondo al pasar el ratón */
+}
+
+.navbar .nav-links {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    float: right;
+}
+
+.navbar .nav-links li {
+    display: inline-block;
+    margin: 0 10px;
+}
+
+.navbar .nav-links li a {
+    color: white;
+    text-decoration: none;
+    padding: 15px 20px;
+    display: block;
+}
+
+.navbar .nav-links li a:hover {
+    background-color: #555; /* Color de fondo al pasar el ratón */
+}
