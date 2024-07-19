@@ -22,6 +22,7 @@ async def ingreso_docs( request:Request, fileDoc : List[UploadFile]):
     collection = mongodb[obra]
     carpeta = f"./{obra}"
     os.makedirs(carpeta, exist_ok=True)
+    print (fileDoc)
     
     for i in range (1, int(data.get("numDocs"))+1):
         filecod = data.get(f"fileCod{i}")
@@ -50,4 +51,9 @@ async def ingreso_docs( request:Request, fileDoc : List[UploadFile]):
 
         with open(path, "wb") as buffer:
             shutil.copyfileobj(fileDoc[i-1].file, buffer)
-    return {"message": "Formulario recibido exitosamente"}
+
+    return HTMLResponse(status_code=status.HTTP_201_CREATED)
+    # return RedirectResponse(
+    #     url="http://10.222.48.245:3000/home", 
+    #     status_code=status.HTTP_303_SEE_OTHER)
+    

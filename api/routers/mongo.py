@@ -8,30 +8,30 @@ router = APIRouter()
 
 
 
-@router.get("/docs_list", response_model=list[Doc])
-async def doc_list():
-    docs_cursor = et_lc.find({})  
-    docs = await docs_cursor.to_list(length=None)
-    return  await docs_schema(docs)
+# @router.get("/docs_list", response_model=list[Doc])
+# async def doc_list():
+#     docs_cursor = et_lc.find({})  
+#     docs = await docs_cursor.to_list(length=None)
+#     return  await docs_schema(docs)
 
 
 
-@router.post("/doc_input", response_model=Doc)
-async def docinput(doc:Doc):
-    if (await search_doc(doc.codigo)):
-        raise HTTPException(status_code=status.HTTP_226_IM_USED, detail="El documento ya existe")
-    doc_dict = dict(doc)
-    print(doc_dict)
-    del doc_dict["id"]
-    id = (await et_lc.insert_one(doc_dict)).inserted_id
-    new_doc= await et_lc.find_one({"_id" : id})
-    return doc_schema(new_doc)
+# @router.post("/doc_input", response_model=Doc)
+# async def docinput(doc:Doc):
+#     if (await search_doc(doc.codigo)):
+#         raise HTTPException(status_code=status.HTTP_226_IM_USED, detail="El documento ya existe")
+#     doc_dict = dict(doc)
+#     print(doc_dict)
+#     del doc_dict["id"]
+#     id = (await et_lc.insert_one(doc_dict)).inserted_id
+#     new_doc= await et_lc.find_one({"_id" : id})
+#     return doc_schema(new_doc)
 
 
-async def search_doc(doc_cod:str) ->bool:
-    try:
-        doc = await et_lc.find_one({"codigo": doc_cod})
-        return doc is not None
-    except:
-        return False
+# async def search_doc(doc_cod:str) ->bool:
+#     try:
+#         doc = await et_lc.find_one({"codigo": doc_cod})
+#         return doc is not None
+#     except:
+#         return False
     

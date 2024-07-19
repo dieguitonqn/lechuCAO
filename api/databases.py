@@ -11,6 +11,9 @@ class DB_Settings(BaseSettings):
     DB_PWD : str
     DB_HOST : str
     MONGO_URI : str
+    ACCESS_TOKEN_EXPIRE_MINUTES : int
+    SECRET_KEY :str
+    ALGORITHM :str
     model_config = SettingsConfigDict(env_file=".env")
 
 
