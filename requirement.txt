@@ -1,0 +1,12 @@
+fastapi==0.0.3
+typing
+pydantic
+os
+shutil
+bcrypt
+datetime
+jwt
+passlib
+starlette
+sqlalchemy
+pydantic_settings

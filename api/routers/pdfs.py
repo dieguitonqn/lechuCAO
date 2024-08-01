@@ -15,6 +15,6 @@ async def mostrar_pdf(pdf_link: Optional[str] = Query(..., description="Enlace o
         return {"error": "El enlace proporcionado no parece ser un enlace válido a un documento PDF."}
     
     # Puedes implementar más validaciones según tus necesidades, como verificar si el enlace es accesible, etc.
-    
+    # pdf_link = "http://10.222.48.245:8000"+pdf_link
     # Simplemente devolver el archivo PDF como respuesta
     return FileResponse(pdf_link, media_type='application/pdf', filename='documento.pdf', content_disposition_type='inline')

@@ -1,42 +1,45 @@
 import shutil
 from typing import List, Annotated
-from fastapi import APIRouter, File, Form, Request, UploadFile, status
+from fastapi import APIRouter, File, Form, Request, UploadFile, status, Depends
 from fastapi.responses import HTMLResponse, RedirectResponse
+from fastapi.security import OAuth2PasswordBearer
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 from pydantic import BaseModel, Field
 from api.databases import mongodb
 from api.schemas import Doc
 import os
+from api.routers.login import oauth2_login
 
 router = APIRouter()
 
-router.mount("/static", StaticFiles(directory="static"), name="static")
-templates = Jinja2Templates(directory="templates")
+# oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/t_check")
+# router.mount("/static", StaticFiles(directory="static"), name="static")
+# templates = Jinja2Templates(directory="templates")
 
 @router.post("/ingreso_docs")
-async def ingreso_docs( request:Request, fileDoc : List[UploadFile]):
+async def ingreso_docs( request:Request, fileDoc : List[UploadFile], token:str = Depends(oauth2_login)):
     
     data = await request.form()
     obra = data.get ("obra")
     collection = mongodb[obra]
-    carpeta = f"./{obra}"
+    carpeta = f"./DocumentosCAO/{obra}"
     os.makedirs(carpeta, exist_ok=True)
     print (fileDoc)
     
     for i in range (1, int(data.get("numDocs"))+1):
-        filecod = data.get(f"fileCod{i}")
-        fileDesc = data.get(f"fileDesc{i}") 
-        fileRev = data.get(f"fileRev{i}")
-        fileDate = data.get (f"fileDate{i}")
-        print(f"Archivo {i}: {fileDoc[i - 1].filename}, Código: {filecod}")
-        print (filecod)
-        print (fileDesc)
-        print (fileRev)
-        print (fileDate)
-        print (fileDoc[i-1].filename)
+        # filecod = data.get(f"fileCod{i}")
+        # fileDesc = data.get(f"fileDesc{i}") 
+        # fileRev = data.get(f"fileRev{i}")
+        # fileDate = data.get (f"fileDate{i}")
+        # print(f"Archivo {i}: {fileDoc[i - 1].filename}, Código: {filecod}")
+        # print (filecod)
+        # print (fileDesc)
+        # print (fileRev)
+        # print (fileDate)
+        # print (fileDoc[i-1].filename)
         path = os.path.join(carpeta, fileDoc[i-1].filename)
-        print(path)
+        # print(path)
         documentoInDB = Doc(descripcion=data.get(f"fileDesc{i}"),
                             codigo=data.get(f"fileCod{i}"),
                             revision=data.get(f"fileRev{i}"),

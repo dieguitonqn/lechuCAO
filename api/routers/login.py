@@ -3,7 +3,7 @@ import bcrypt
 from fastapi import APIRouter, Depends, HTTPException, Request, Form, status
 from fastapi.security import OAuth2PasswordBearer
 from fastapi.staticfiles import StaticFiles
-from typing import Annotated
+from typing import Annotated, Union
 from fastapi.responses import HTMLResponse, RedirectResponse
 from fastapi.templating import Jinja2Templates
 from fastapi.middleware.cors import CORSMiddleware
@@ -25,7 +25,7 @@ def compare_passwords(plain_pwd, stored_hash):
     is_match = bcrypt.verify(plain_pwd, stored_hash)
     return is_match
 
-def create_access_token(data: dict, expires_delta: timedelta | None = None):
+def create_access_token(data: dict, expires_delta: Union[timedelta, None] = None):
     to_encode = data.copy()
     if expires_delta:
         expire = datetime.now(timezone.utc) + expires_delta
@@ -72,10 +72,10 @@ async def verify_password(request:Request, username: Annotated[str, Form()], pas
     #     )
     
 
-oauth2 = OAuth2PasswordBearer(tokenUrl="login")
+oauth2_login = OAuth2PasswordBearer(tokenUrl="/api/login")
 
 @router.get("/t_check")
-async def verify_token(token: Annotated[str, Depends(oauth2)]):
+async def verify_token(token: Annotated[str, Depends(oauth2_login)]):
     try:
         payload = jwt.decode(token, db_settings.SECRET_KEY, algorithms=[db_settings.ALGORITHM])
         # Check if token has expired
@@ -92,7 +92,7 @@ async def verify_token(token: Annotated[str, Depends(oauth2)]):
         #     print(True)
         #     raise HTTPException(status_code=401, detail="Token has expired")
         # Token is valid, return a success message (optional)
-        token = create_access_token(data={'sub':payload.get("sub"), 'rol':payload.get('rol')}, expires_delta=timedelta(minutes=1))
+        token = create_access_token(data={'sub':payload.get("sub"), 'rol':payload.get('rol')}, expires_delta=timedelta(minutes=5))
         return {"message": "Token is valid", "token":token}
 
     except jwt.DecodeError:
@@ -101,7 +101,19 @@ async def verify_token(token: Annotated[str, Depends(oauth2)]):
         raise HTTPException(status_code=401, detail="Token has expired")
     
 @router.get('/t_admin_check')
-async def check_admin(token:Annotated[str, Depends(oauth2)]):
+async def check_admin(token:Annotated[str, Depends(oauth2_login)]):
+    try:
+        payload = jwt.decode(token, db_settings.SECRET_KEY, algorithms=[db_settings.ALGORITHM])
+        print ( payload.get("rol"))
+        if payload.get("rol") in ["admin"]:
+            return HTMLResponse(status_code=status.HTTP_202_ACCEPTED)
+        else:
+            return HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+    except:
+        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED)
+    
+@router.get('/t_auto_check')
+async def check_admin(token:Annotated[str, Depends(oauth2_login)]):
     try:
         payload = jwt.decode(token, db_settings.SECRET_KEY, algorithms=[db_settings.ALGORITHM])
         print ( payload.get("rol"))
